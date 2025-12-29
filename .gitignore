@@ -198,3 +198,5 @@ backup
 
 
 .hypothesis
+gitignored_folder
+.playwright-mcp/
