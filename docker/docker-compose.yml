@@ -42,6 +42,18 @@ services:
       - ../history_data_agent:/ragflow/history_data_agent
       - ./service_conf.yaml.template:/ragflow/conf/service_conf.yaml.template
       - ./entrypoint.sh:/ragflow/entrypoint.sh
+      # Local development: mount deepdoc for live code changes
+      - type: bind
+        source: ../deepdoc
+        target: /ragflow/deepdoc
+      # Fix async_generator bug in canvas_service.py
+      - type: bind
+        source: ./canvas_service_fixed.py
+        target: /ragflow/api/db/services/canvas_service.py
+      # Fix async_generator bug in session.py
+      - type: bind
+        source: ./session_fixed.py
+        target: /ragflow/api/apps/sdk/session.py
     env_file: .env
     networks:
       - ragflow
